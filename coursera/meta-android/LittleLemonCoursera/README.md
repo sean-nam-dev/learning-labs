@@ -36,3 +36,5 @@ It is not intended to represent production-ready software.
 
 ### Screenshots
 
+<img width="380" height="1724" alt="image" src="https://github.com/user-attachments/assets/2d47af31-1933-49be-a8c2-eb7c25195246" />
+
