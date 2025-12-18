@@ -8,6 +8,10 @@ The main goal is to practice building composable screens, managing UI state, and
 
 Networking, persistence, and production concerns are intentionally out of scope.
 
+## Screenshot
+
+<img src="https://github.com/user-attachments/assets/88c8af43-9755-4278-8b75-f6ceccaa47cf" width="360"/>
+
 ## Learning Objectives
 - Building UI with Jetpack Compose
 - Screen composition and layout
