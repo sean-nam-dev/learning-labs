@@ -1,8 +1,8 @@
-import {MainScreen} from "./component/MainScreen.tsx";
+import {LoginScreen} from "./ui/screen/LoginScreen.tsx";
 
 function App() {
     return (
-        <MainScreen />
+        <LoginScreen />
     );
 }
 

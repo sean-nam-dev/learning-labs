@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     sectionHeader: {
         backgroundColor: '#fbdabb',
-            color: 'white',
+        color: 'white',
         fontSize: 35,
         flexWrap: 'wrap',
         textAlign: 'center',
