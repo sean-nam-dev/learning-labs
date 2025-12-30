@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.littlelemonfinal.navigation.Destination
+import com.example.littlelemonfinal.presentation.screen.LogoutScreen
 import com.example.littlelemonfinal.presentation.screen.RegisterScreen
+import com.example.littlelemonfinal.presentation.viewmodel.LogoutViewModel
 import com.example.littlelemonfinal.presentation.viewmodel.MainViewModel
 import com.example.littlelemonfinal.presentation.viewmodel.RegisterViewModel
 import com.example.littlelemonfinal.ui.theme.LittleLemonFinalTheme
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
             LittleLemonFinalTheme {
                 NavHost(
                     startDestination = when (mainViewModel.getStartDestination()) {
-                        Destination.Home.toString() -> Destination.Register
+                        Destination.Home.toString() -> Destination.Home
                         else -> Destination.Register
                     },
                     navController = navController
@@ -42,7 +44,12 @@ class MainActivity : ComponentActivity() {
 
                     }
                     composable<Destination.LogOut> {
+                        val logoutViewModel: LogoutViewModel by viewModel()
 
+                        LogoutScreen(
+                            viewModel = logoutViewModel,
+                            navController = navController
+                        )
                     }
                 }
             }

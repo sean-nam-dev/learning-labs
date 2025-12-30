@@ -8,6 +8,7 @@ import com.example.littlelemonfinal.domain.ReadStartDestinationUsecase
 import com.example.littlelemonfinal.domain.SharedPrefsRepository
 import com.example.littlelemonfinal.domain.WritePersonalInfoUsecase
 import com.example.littlelemonfinal.domain.WriteStartDestinationUsecase
+import com.example.littlelemonfinal.presentation.viewmodel.LogoutViewModel
 import com.example.littlelemonfinal.presentation.viewmodel.MainViewModel
 import com.example.littlelemonfinal.presentation.viewmodel.RegisterViewModel
 import org.koin.android.ext.koin.androidContext
@@ -63,6 +64,14 @@ val appModule = module {
         RegisterViewModel(
             writeStartDestinationUsecase = get(),
             writePersonalInfoUsecase = get(),
+        )
+    }
+
+    viewModel<LogoutViewModel> {
+        LogoutViewModel(
+            readPersonalInfoUsecase = get(),
+            writePersonalInfoUsecase = get(),
+            writeStartDestinationUsecase = get()
         )
     }
 }
