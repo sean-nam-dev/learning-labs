@@ -4,7 +4,7 @@ This repository contains the **product discovery and UX design artifacts** for a
 
 The goal of this project was to practice and demonstrate a **structured product thinking process**, from problem definition to early solution validation, rather than focusing on visual polish alone.
 
-
+> _[Little Lemon Design Link](https://www.figma.com/design/bxnZSR9sV2ESBN1LdDrRRd/LittleLemon?node-id=3-610&t=J32x1pDqpuldOQGD-1)_
 
 ## 📌 Scope of the Project
 
@@ -22,14 +22,7 @@ All artifacts were created in **Figma** and are documented here for transparency
 
 ## 🧠 Problem Statement
 
-> _Describe the core problem the product is addressing._
-
-- What problem exists?
-- Who experiences it?
-- Why is it worth solving?
-
-**Example:**
-Users struggle to stay engaged with local restaurants due to a lack of simple and meaningful digital touchpoints.
+Little Lemon currently does not offer an online table reservation feature for mobile users. Customers who want to dine at the restaurant must call to make a reservation, which can be inconvenient and time-consuming. This creates friction in the user experience and may lead to lost reservations. The goal of this project is to design a simple and intuitive mobile reservation experience that allows users to reserve a table quickly and confidently.
 
 
 
@@ -45,7 +38,8 @@ A primary persona was defined to represent the target user and guide design deci
 
 📸 **Persona snapshot:**
 
-<!-- Insert persona image here -->
+<img src="https://github.com/user-attachments/assets/1487fd0d-9a43-41cd-84b4-b817cc487ecc" alt="User Persona" width="800" />
+
 
 
 
@@ -60,7 +54,8 @@ The user journey illustrates the end-to-end experience, highlighting:
 
 📸 **Journey Map:**
 
-<!-- Insert journey map image here -->
+<img width="800" alt="Journey Map" src="https://github.com/user-attachments/assets/8a8d86fd-bf8a-46e2-b9e5-025f9972b46b" />
+
 
 
 
@@ -75,7 +70,7 @@ The focus at this stage was on:
 
 📸 **Wireframes:**
 
-<!-- Insert wireframe images here -->
+<img width="800" alt="Wireframes" src="https://github.com/user-attachments/assets/7c150ace-1a2b-4943-96bc-ff914671179d" />
 
 
 
@@ -83,12 +78,10 @@ The focus at this stage was on:
 
 An interactive prototype was built to validate the main user flow and navigation structure.
 
-📎 **Figma Prototype:**
-> 👉 _Insert Figma prototype link here_
-
 📸 **Prototype preview:**
 
-<!-- Insert prototype screenshots here -->
+<img width="800" alt="Prototype" src="https://github.com/user-attachments/assets/71586531-e49e-4afd-b975-097974728d8d" />
+
 
 
 
