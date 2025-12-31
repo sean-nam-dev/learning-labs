@@ -14,6 +14,7 @@ fun LogoutScreen(
     LogoutUIScreen(
         data = viewModel.getData(),
         onLogoutAction = {
+            viewModel.logout()
             navController.navigate(Destination.Register) {
                 popUpTo(0) {
                     inclusive = true
