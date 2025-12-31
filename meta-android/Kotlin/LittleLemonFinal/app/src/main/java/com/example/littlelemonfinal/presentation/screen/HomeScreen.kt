@@ -12,12 +12,22 @@ fun HomeScreen(
     homeViewModel: HomeViewModel,
     navController: NavController
 ) {
-    val state = homeViewModel.state.collectAsStateWithLifecycle(true)
+    val menuList = homeViewModel.menuList.collectAsStateWithLifecycle()
+    val searchQuery = homeViewModel.searchQuery.collectAsStateWithLifecycle()
+    val filter = homeViewModel.filter.collectAsStateWithLifecycle()
 
     HomeUIScreen(
+        menuList = menuList.value,
+        searchQuery = searchQuery.value,
+        filterList = filter.value,
         onProfileClick = {
             navController.navigate(Destination.LogOut)
         },
-        isLoading = state.value
+        onSearchQuery = {
+            homeViewModel.onSearchQuery(it)
+        },
+        onFilter = {
+            homeViewModel.onFilter(it)
+        }
     )
 }

@@ -1,6 +1,5 @@
 package com.example.littlelemonfinal.presentation.component
 
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,15 +13,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.littlelemonfinal.util.FilterType
 
 @Composable
-fun CategoryBlock() {
-    val tagList = listOf("Starters", "Mains", "Desserts", "Drinks", "Soups")
-    val context = LocalContext.current
+fun CategoryBlock(
+    filterList: List<FilterType>,
+    onClick: (FilterType) -> Unit
+) {
+    val filterTagList = listOf(
+        FilterType.Starters,
+        FilterType.Mains,
+        FilterType.Desserts,
+        FilterType.Drinks,
+        FilterType.Soups
+    )
 
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -41,22 +48,31 @@ fun CategoryBlock() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
-            items(tagList) { tag ->
+            items(filterTagList) { tag ->
+                val border = if (filterList.contains(tag)) {
+                    BorderStroke(
+                        width = 1.dp,
+                        color = Color.Black
+                    )
+                } else {
+                    BorderStroke(
+                        width = 0.dp,
+                        color = Color(0xFFedefee)
+                    )
+                }
+
                 SuggestionChip(
                     onClick = {
-                        Toast.makeText(context, tag, Toast.LENGTH_SHORT).show()
+                        onClick(tag)
                     },
                     label = {
-                        Text(tag, fontWeight = FontWeight.Bold)
+                        Text(tag.value, fontWeight = FontWeight.Bold)
                     },
                     colors = SuggestionChipDefaults.suggestionChipColors(
                         containerColor = Color(0xFFedefee),
                         labelColor = Color(0xFF4d625b)
                     ),
-                    border = BorderStroke(
-                        width = 0.dp,
-                        color = Color(0xFFedefee)
-                    )
+                    border = border
                 )
             }
         }

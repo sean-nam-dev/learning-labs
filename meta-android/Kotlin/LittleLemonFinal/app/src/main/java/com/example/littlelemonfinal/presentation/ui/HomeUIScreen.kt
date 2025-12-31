@@ -47,102 +47,94 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.littlelemonfinal.R
+import com.example.littlelemonfinal.domain.model.Menu
 import com.example.littlelemonfinal.presentation.component.CategoryBlock
 import com.example.littlelemonfinal.presentation.component.Header
 import com.example.littlelemonfinal.presentation.component.InfoBody
 import com.example.littlelemonfinal.presentation.component.LemonLogo
 import com.example.littlelemonfinal.presentation.component.ProfileButton
 import com.example.littlelemonfinal.ui.theme.LittleLemonFinalTheme
+import com.example.littlelemonfinal.util.FilterType
 import com.example.littlelemonfinal.util.Temp
 
 @Composable
 fun HomeUIScreen(
+    menuList: List<Menu>,
+    searchQuery: String,
+    filterList: List<FilterType>,
     onProfileClick: () -> Unit,
-    isLoading: Boolean
+    onSearchQuery: (String) -> Unit,
+    onFilter: (FilterType) -> Unit
 ) {
-    var searchText by remember { mutableStateOf("") }
-    val onSearchText: (String) -> Unit = {
-        searchText = it
-    }
-
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Header(onProfileClick)
         }
         item {
             InfoBody(
-                searchText = searchText,
-                onSearchText = onSearchText
+                searchText = searchQuery,
+                onSearchText = onSearchQuery
             )
         }
         item {
-            CategoryBlock()
+            CategoryBlock(
+                filterList =  filterList,
+                onClick = onFilter
+            )
         }
         item {
             Divider(modifier = Modifier.padding(horizontal = 10.dp))
         }
-        if (isLoading) {
-            item {
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(top = 20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-        } else {
-            items(Temp.list) { i ->
-                Column(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(horizontal = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(5.dp)
+        items(menuList) { i ->
+            Column(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(horizontal = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
+                Text(
+                    text = i.title,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(5.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = i.title,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold
+                        modifier = Modifier.weight(0.7f),
+                        text = i.description,
+                        fontSize = 12.sp,
+                        color = Color(0xFF697b74),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        lineHeight = 14.sp
                     )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(5.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            modifier = Modifier.weight(0.7f),
-                            text = i.description,
-                            fontSize = 12.sp,
-                            color = Color(0xFF697b74),
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
-                            lineHeight = 14.sp
-                        )
-                        AsyncImage(
-                            modifier = Modifier.weight(0.3f),
-                            model = i.photo,
-                            contentDescription = null
-                        )
-                    }
-                    Text(
-                        text = "$${i.price}",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF60736d)
+                    AsyncImage(
+                        modifier = Modifier.weight(0.3f),
+                        model = i.image,
+                        contentDescription = null
                     )
-                    Divider(modifier = Modifier.padding(vertical = 10.dp))
                 }
+                Text(
+                    text = "$${i.price}",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF60736d)
+                )
+                Divider(modifier = Modifier.padding(vertical = 10.dp))
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun HomeUIScreenPreview() {
-    LittleLemonFinalTheme {
-        HomeUIScreen(
-            onProfileClick = {},
-            isLoading = false
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun HomeUIScreenPreview() {
+//    LittleLemonFinalTheme {
+//        HomeUIScreen(
+//            emptyList(),
+//            onProfileClick = {}
+//        )
+//    }
+//}
