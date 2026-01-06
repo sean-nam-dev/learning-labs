@@ -1,11 +1,13 @@
 package org.example
 
+import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.times
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-
+    println(Temp.data.checkParetoPrinciple() == false)
 }
 
 /*
@@ -118,4 +120,35 @@ fun TaxiPark.findTheMostFrequentTripDurationPeriod(): IntRange? {
 
         result.maxBy { it.value }.key
     }
+}
+
+/*
+ * Task #6.
+ * Check whether 20% of the drivers contribute 80% of the income.
+ */
+fun TaxiPark.checkParetoPrinciple(): Boolean {
+    if (allDrivers.isEmpty() || trips.isEmpty()) return false
+
+    val topDriversCount = floor(allDrivers.size * 0.2).coerceAtLeast(1.0).toInt()
+    val tripDriverMap = mutableMapOf<Driver, Double>()
+
+    trips.forEach { trip ->
+        tripDriverMap[trip.driver] = tripDriverMap.getOrDefault(trip.driver, 0.0) + trip.cost
+    }
+
+    allDrivers.forEach { driver ->
+        if (!tripDriverMap.contains(driver)) {
+            tripDriverMap[driver] = 0.0
+        }
+    }
+
+    val total = tripDriverMap
+        .values
+        .sortedDescending()
+        .take(topDriversCount)
+        .sum()
+
+    val targetIncome = tripDriverMap.values.sum() * 0.8
+
+    return total >= targetIncome
 }
