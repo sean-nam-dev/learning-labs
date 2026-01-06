@@ -33,3 +33,20 @@ fun TaxiPark.findFaithfulPassengers(minTrips: Int): Set<Passenger> {
 
     return passengerMap.filter { it.value >= minTrips }.keys
 }
+
+/*
+ * Task #3. Find all the passengers, who were taken by a given driver more than once.
+ */
+fun TaxiPark.findFrequentPassengers(driver: Driver): Set<Passenger> {
+    val result = mutableMapOf<Passenger, Int>()
+
+    this.trips.forEach { trip ->
+        if (trip.driver == driver) {
+            trip.passengers.forEach { passenger ->
+                result[passenger] = result.getOrDefault(passenger, 0) + 1
+            }
+        }
+    }
+
+    return result.filter { it.value > 1 }.keys
+}
