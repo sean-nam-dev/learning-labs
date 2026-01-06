@@ -76,3 +76,46 @@ fun TaxiPark.findSmartPassengers(): Set<Passenger> {
 
     return result
 }
+
+/*
+ * Task #5. Find the most frequent trip duration among minute periods 0..9, 10..19, 20..29, and so on.
+ * Return any period if many are the most frequent, return `null` if there're no trips.
+ */
+fun TaxiPark.findTheMostFrequentTripDurationPeriod(): IntRange? {
+    val durationList = mutableListOf<Int>()
+
+    this.trips.forEach { trip ->
+        durationList += trip.duration
+    }
+
+    return if (durationList.isEmpty()) {
+        null
+    } else {
+        val max = durationList.maxOf { it }
+
+        val periodList = mutableListOf<IntRange>()
+        var index = 0
+        while (index < max) {
+            periodList += index..(index + 9)
+            index += 10
+        }
+
+        val result = mutableMapOf<IntRange, Int>()
+
+        durationList.forEach { duration ->
+            var innerIndex = 0
+
+            while (innerIndex < periodList.size) {
+                if (duration in periodList[innerIndex]) {
+                    result[periodList[innerIndex]] = result.getOrDefault(periodList[innerIndex], 0) + 1
+                    break
+                }
+
+                innerIndex++
+            }
+        }
+
+
+        result.maxBy { it.value }.key
+    }
+}
