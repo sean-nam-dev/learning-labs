@@ -117,6 +117,33 @@ fun String.toRational(): Rational {
     )
 }
 
+infix fun Int.divBy(other: Int): Rational {
+    return normalize(
+        Rational(
+            numerator = this.toBigInteger(),
+            denominator = other.toBigInteger()
+        )
+    )
+}
+
+infix fun Long.divBy(other: Long): Rational {
+    return normalize(
+        Rational(
+            numerator = this.toBigInteger(),
+            denominator = other.toBigInteger()
+        )
+    )
+}
+
+infix fun BigInteger.divBy(other: BigInteger): Rational {
+    return normalize(
+        Rational(
+            numerator = this,
+            denominator = other
+        )
+    )
+}
+
 private fun normalize(rational: Rational): Rational {
     val gcd = rational.numerator.gcd(rational.denominator)
 
