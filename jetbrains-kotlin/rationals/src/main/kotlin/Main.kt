@@ -88,6 +88,33 @@ data class Rational(
             )
         )
     }
+
+    operator fun rangeTo(other: Rational): ClosedRange<Rational> {
+        return object : ClosedRange<Rational> {
+            override val start: Rational
+                get() = this@Rational
+            override val endInclusive: Rational
+                get() = other
+        }
+    }
+}
+
+fun String.toRational(): Rational {
+    val nums = this.split('/').map { it.toBigInteger() }
+
+    return normalize(
+        if (nums.size > 1) {
+            Rational(
+                numerator = nums.first(),
+                denominator = nums.last()
+            )
+        } else {
+            Rational(
+                numerator = nums.first(),
+                denominator = BigInteger.ONE
+            )
+        }
+    )
 }
 
 private fun normalize(rational: Rational): Rational {
