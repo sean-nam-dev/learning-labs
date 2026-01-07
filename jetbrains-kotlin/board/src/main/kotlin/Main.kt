@@ -67,17 +67,34 @@ class Board(override val width: Int, ) : SquareBoard {
         else throw IllegalArgumentException()
     }
 
-    override fun getAllCells(): Collection<Cell> = TODO()
+    override fun getAllCells(): Collection<Cell> = array.flatten()
 
     override fun getRow(i: Int, jRange: IntProgression): List<Cell> {
-        return TODO()
+        val result = mutableListOf<Cell?>()
+
+        jRange.forEach { j ->
+            result += getCellOrNull(i, j)
+        }
+
+        return result.filterNotNull()
     }
 
     override fun getColumn(iRange: IntProgression, j: Int): List<Cell> {
-        return TODO()
+        val result = mutableListOf<Cell?>()
+
+        iRange.forEach { i ->
+            result += getCellOrNull(i, j)
+        }
+
+        return result.filterNotNull()
     }
 
     override fun Cell.getNeighbour(direction: Direction): Cell? {
-        return TODO()
+        return when (direction) {
+            Direction.UP -> getCellOrNull(this.i - 1, this.j)
+            Direction.DOWN -> getCellOrNull(this.i + 1, this.j)
+            Direction.RIGHT -> getCellOrNull(this.i, this.j + 1)
+            Direction.LEFT -> getCellOrNull(this.i, this.j - 1)
+        }
     }
 }
