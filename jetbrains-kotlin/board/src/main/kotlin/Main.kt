@@ -4,7 +4,7 @@ fun main() {
 
 }
 
-fun createSquareBoard(width: Int): SquareBoard = TODO()
+fun createSquareBoard(width: Int): SquareBoard = Board(width)
 fun <T> createGameBoard(width: Int): GameBoard<T> = TODO()
 
 data class Cell(val i: Int, val j: Int) {
@@ -45,4 +45,41 @@ interface GameBoard<T> : SquareBoard {
     fun find(predicate: (T?) -> Boolean): Cell?
     fun any(predicate: (T?) -> Boolean): Boolean
     fun all(predicate: (T?) -> Boolean): Boolean
+}
+
+class Board(override val width: Int, ) : SquareBoard {
+    val array = Array(width) { i ->
+        Array(width) { j ->
+            Cell(i + 1, j + 1)
+        }
+    }
+
+    override fun getCellOrNull(i: Int, j: Int): Cell? {
+        return if (i in 1..width && j in 1..width) {
+            getCell(i, j)
+        } else {
+            null
+        }
+    }
+
+    override fun getCell(i: Int, j: Int): Cell {
+        return array[i - 1][j - 1]
+    }
+
+    override fun getAllCells(): Collection<Cell> = array.flatten()
+
+    override fun getRow(i: Int, jRange: IntProgression): List<Cell> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getColumn(iRange: IntProgression, j: Int): List<Cell> {
+        TODO("Not yet implemented")
+    }
+
+    override fun Cell.getNeighbour(direction: Direction): Cell? {
+        TODO("Not yet implemented")
+    }
+
+    private fun checkBounds(i: Int, j: Int): Boolean =
+        i in 1..width && j in 1..width
 }
